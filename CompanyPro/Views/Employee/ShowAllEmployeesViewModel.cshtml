@@ -14,16 +14,20 @@
     List<string>? branches = ViewData["branches"] as List<string> ?? new();
 } *@
 
-<select class="form-control">
+@* <select class="form-control">
     @foreach (var item in Model[0].Branches)
     {
         <option>@item</option>
     }
 </select>
+<br /> *@
 
-<br />
 
+@{
+    Layout = "CustomeLayout";
+}
 
+<a class="btn btn-primary" asp-controller="Employee" asp-action="AddNew">Add New Employee</a>
 <table class="table table-bordered table-hover">
     <tr>
         <th>Id</th>
@@ -45,3 +49,16 @@
     }
 </table>
 
+@* @{
+    int departmentId = 3;
+    List<DeptVM> depts = new List<DeptVM>
+    {
+        new DeptVM(){Id=1,Name="SD"},
+        new DeptVM(){Id=2,Name="Java"},
+        new DeptVM(){Id=3,Name="OS"},
+    };
+}
+
+<select asp-for="departmentId">
+    
+</select> *@

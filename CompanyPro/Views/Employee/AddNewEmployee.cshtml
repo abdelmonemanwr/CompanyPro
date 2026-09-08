@@ -1,0 +1,36 @@
+﻿@model AddEmployeeViewModel
+
+@{
+    SelectList deptsList = new SelectList(ViewBag.Depts, "Id", "Name");
+}
+
+@* <form method="post" asp-controller="Employee" asp-action="AddNew"> *@
+<form method="post">
+    <div>
+        <label asp-for="Name"></label>
+        <input class="form form-control" asp-for="Name" />
+    </div>
+    <div>
+        <label asp-for="Address"></label>
+        <input class="form form-control" asp-for="Address"/>
+    </div>
+    <div>
+        <label asp-for="Salary"></label>
+        <input class="form form-control" asp-for="Salary"/>
+    </div>
+    <div>
+        <label asp-for="ImageUrl"></label>
+        <input class="form form-control" asp-for="ImageUrl"/>
+    </div>
+    <div>
+        @* <label asp-for="DepartmentId"></label>
+        <input class="form form-control" asp-for="DepartmentId"/> *@
+
+        <select class="form form-control" 
+                asp-for="DepartmentId"
+                asp-items="deptsList">
+        </select>
+    </div>
+
+    <input type="submit" value="Add" class="btn btn-success" />
+</form>

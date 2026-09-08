@@ -29,9 +29,22 @@ namespace CompanyPro.Controllers
             //return View(depts);
         }
 
+        //// Pure HTML
+        //public IActionResult Add()
+        //{
+        //    return View("Add");
+        //}
+
+        //// Pure C#
+        //public IActionResult Add()
+        //{
+        //    return View("Add_PureC#");
+        //}
+
+        // Tag Helper
         public IActionResult Add()
         {
-            return View("Add");
+            return View("Add_Tag_Helper");
         }
 
         [HttpPost]
@@ -45,7 +58,7 @@ namespace CompanyPro.Controllers
             // name="", loc="cairo"
             if (string.IsNullOrEmpty(deptVM.DepartmentName))
             {
-                return View("Add", deptVM);
+                return View("Add_Tag_Helper", deptVM);
             }
 
             var newDepartment = new Department()

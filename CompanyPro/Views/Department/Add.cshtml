@@ -1,6 +1,50 @@
 ﻿@model DepartmentViewModel
 
+
+
+@*Pure C#*@
 <form method="post" action="/Department/SaveNewDepartment" class="form form-control">
+    @* <label>Department Name</label> *@
+    @Html.LabelFor(e=>e.DepartmentName)
+    @* <input type="text" name="DepartmentName" value="@Model?.DepartmentName" id="DepartmentName" class="form form-control" /> *@
+    @* @Html.TextBox("DepartmentName", new {style="color:blue", @class="form form-control"}) *@
+    @Html.TextBoxFor(e=>e.DepartmentName, new {style="color:blue", @class="form form-control"})
+
+    @* <label>Department Location</label> *@
+    @Html.Label("Location")
+    @* <input type="text" name="DepartmentLocation" value="@Model?.DepartmentLocation" id="DepartmentLocation" class="form form-control" /> *@
+    @Html.TextBox("DepartmentLocation", null, new {style="color:green", @class="form form-control"})
+    @* @Html.TextBoxFor(e=>e.DepartmentLocation, new {style="color:green", @class="form form-control"}); *@
+
+    @* @Html.LabelFor(e=>e.Email)
+    @Html.EditorFor(e => e.Email, new { style = "color:blue", @class = "form form-control" })
+
+    @Html.LabelFor(e=>e.Username)
+    @Html.TextBoxFor(e => e.Username, new { style = "color:blue", @class = "form form-control" })
+
+    @Html.LabelFor(e=>e.Password)
+    @Html.PasswordFor(e => e.Password, new { style = "color:blue", @class = "form form-control" })
+
+    @Html.LabelFor(e=>e.Salary)
+    @Html.EditorFor(e => e.Salary, new { style = "color:blue", @class = "form form-control" })
+
+    @Html.LabelFor(e=>e.IsValid)
+    @Html.EditorFor(e => e.IsValid, new { style = "color:blue", @class = "form form-control" }) *@
+    
+
+    <input type="submit" value="Create" class="btn btn-success" />
+</form>
+
+@* <a href="/Department/Index">Back to List</a> *@
+@* @Html.ActionLink("Back2List", "GetAllDepartments", "Department") *@
+@Html.ActionLink("Back2List", "GetAllDepartments")
+@* // @Html.ActionLink("Back2List", "GetAllEmployees", "Employee") *@
+
+
+
+
+@* Pure HTML
+@* <form method="post" action="/Department/SaveNewDepartment" class="form form-control">
     <label>Department Name</label>
     <input type="text" name="DepartmentName" value="@Model?.DepartmentName" id="DepartmentName" class="form form-control" />
     
@@ -10,4 +54,4 @@
     <input type="submit" value="Create" class="btn btn-success"/>
 </form>
 
-<a href="/Department/Index">Back to List</a>
+<a href="/Department/Index">Back to List</a> *@

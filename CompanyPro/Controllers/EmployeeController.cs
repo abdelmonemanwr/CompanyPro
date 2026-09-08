@@ -99,6 +99,66 @@ namespace CompanyPro.Controllers
         //    return View("ShowAllEmployees", employeesModel);
         //}
 
+        public IActionResult GetEmployeeById(int id, int age, string name)
+        {
+            Console.WriteLine($"id={id}, age={age}, name={name}\n");
+            var employeeModel = dbContext.Employees.FirstOrDefault(e => e.EId == id);
+            return View("GetEmployeeById", employeeModel);
+        }
+
+        [HttpGet]
+        public IActionResult AddNew()
+        {
+            var deptsList = dbContext.Departments.Select(d => new DeptVM { Id = d.Did, Name = d.Name }).ToList();
+            ViewBag.Depts = deptsList;
+            return View("AddNewEmployee");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddNew(AddEmployeeViewModel empVM)
+        {
+            if (empVM.DepartmentId < 0 || string.IsNullOrEmpty(empVM.Name))
+            {
+                var deptsList = dbContext.Departments.Select(d => new DeptVM { Id = d.Did, Name = d.Name }).ToList();
+                ViewBag.Depts = deptsList;
+                return View("AddNewEmployee", empVM);
+            }
+
+            var emp = new Employee()
+            {
+                Name = empVM.Name,
+                Salary = empVM.Salary,
+                DepartmentId = empVM.DepartmentId,
+                Address = empVM.Address,
+                ImageUrl = empVM.ImageUrl,
+            };
+
+            dbContext.Employees.Add(emp);
+            dbContext.SaveChanges();
+            return RedirectToAction("GetAllEmployees");
+        }
+
+
+
+
+
+        //// employee/test
+        //[HttpGet]
+        //public IActionResult test()
+        //{
+        //    return Content("");
+        //}
+
+        // employee/test
+        // employee/test?x=11
+        //[HttpGet]
+        //public IActionResult test(int x)
+        //{
+        //    return Content("");
+        //}
+
 
     }
 }
