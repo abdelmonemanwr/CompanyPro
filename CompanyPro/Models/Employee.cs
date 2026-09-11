@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CompanyPro.Models
 {
-    public class Employee
+    public class Employee //: ApplicationUser
     {
         [Key]
         public int EId { get; set; }

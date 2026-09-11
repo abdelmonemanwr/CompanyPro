@@ -1,24 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices.ObjectiveC;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace CompanyPro.Models
 {
-    public class ITIContext : DbContext
+    public class ITIContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
+        //public DbSet<ApplicationUser> Users { get; set; }  // already inherited
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
 
-        public ITIContext():base() { }
+        //public ITIContext():base() { }
+        //public ITIContext(DbContextOptions options) :base() { }
+        public ITIContext(DbContextOptions<ITIContext> options) : base(options) { }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseLazyLoadingProxies()
-                .UseSqlServer("Data Source=.;Initial Catalog=DotNet_ST_G4;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder
+        //        .UseLazyLoadingProxies()
+        //        .UseSqlServer("Data Source=.;Initial Catalog=DotNet_ST_G4;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Department>().HasData(new Department() { Did = 1, Name = "SD", Location = "Smart" });
             modelBuilder.Entity<Department>().HasData(new Department() { Did = 2, Name = "OS", Location = "Menofia" });
 

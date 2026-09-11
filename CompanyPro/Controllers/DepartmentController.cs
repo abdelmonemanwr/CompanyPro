@@ -8,11 +8,12 @@ namespace CompanyPro.Controllers
     public class DepartmentController : Controller
     {
 
+        private readonly ITIContext db;
         private readonly IMapper mapper;
-        private readonly ITIContext db = new();
-        public DepartmentController(IMapper mapper)
+        public DepartmentController(IMapper mapper, ITIContext db)
         {
             this.mapper = mapper;
+            this.db = db;
         }
 
         [HttpGet]

@@ -1,4 +1,8 @@
 using CompanyPro.AutoMapper;
+using CompanyPro.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CompanyPro
 {
@@ -7,6 +11,19 @@ namespace CompanyPro
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<ITIContext>(options =>
+            {
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(builder.Configuration.GetConnectionString("iti"));
+            });
+
+
+            // usermanager, userstore, signmanager, 
+            builder.Services
+                .AddIdentity<ApplicationUser, IdentityRole<int>>()
+                .AddEntityFrameworkStores<ITIContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

@@ -9,12 +9,13 @@ namespace CompanyPro.Controllers
     public class EmployeeController : Controller
     {
 
-        private ITIContext dbContext = new ITIContext();  // Consist_of
+        private readonly ITIContext dbContext;
 
         private readonly IMapper _mapper;
-        public EmployeeController(IMapper mapper)
+        public EmployeeController(IMapper mapper, ITIContext dbContext)
         {
             _mapper = mapper;
+            this.dbContext = dbContext;
         }
 
         //using Auto Mapper
